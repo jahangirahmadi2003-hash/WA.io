@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WA.io</title>
+  <title>WA.io</title>
 </head>
 <body>
-    <h1>WA.io</h1>
-    <p>Welcome to WA.io</p>
+  <h1>WA.io Mining App</h1>
 
-    <button onclick="showMessage()">
-        Click Me
-    </button>
+  <p>Balance: 0 WA</p>
 
-    <script>
-        function showMessage() {
-            alert("WA.io is working!");
-        }
-    </script>
+  <button onclick="mine()">
+    Start Mining
+  </button>
+
+  <script>
+    let balance = 0;
+
+    function mine() {
+      balance += 1;
+      document.querySelector("p").innerText =
+        "Balance: " + balance + " WA";
+    }
+  </script>
 </body>
 </html>
