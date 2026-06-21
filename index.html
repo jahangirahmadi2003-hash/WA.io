@@ -1,25 +1,698 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
-  <title>WA.io</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WA.io Token - Mining, Referral & Rewards Platform on BNB Smart Chain">
+    <meta name="keywords" content="WA Token, Mining, Crypto, BNB, DeFi">
+    <meta name="author" content="WA.io Team">
+    
+    <title>WA.io Token - ماینینگ و سیستم پاداش</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #f97316;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #ffffff;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .btn-connect {
+            background: white;
+            color: var(--primary);
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Tokenomics Section */
+        .tokenomics {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .tokenomics h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .tokenomics-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .tokenomics-text h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .tokenomics-text p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .distribution {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .distribution-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .distribution-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .distribution-label {
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .distribution-bar {
+            flex: 1;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .distribution-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        .distribution-percent {
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 50px;
+            text-align: right;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section a {
+            display: block;
+            color: #d1d5db;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            color: #9ca3af;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .tokenomics-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features h2,
+            .tokenomics h2,
+            .how-it-works h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card,
+        .step {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
 </head>
 <body>
-  <h1>WA.io Mining App</h1>
+    <!-- Header/Navigation -->
+    <header>
+        <nav>
+            <div class="logo">⚡ WA.io</div>
+            <ul class="nav-links">
+                <li><a href="#features">ویژگی‌ها</a></li>
+                <li><a href="#tokenomics">توکن‌امیکس</a></li>
+                <li><a href="#how">نحوه کار</a></li>
+                <li><a href="#contact">تماس</a></li>
+            </ul>
+            <button class="btn-connect">اتصال کیف پول</button>
+        </nav>
+    </header>
 
-  <p>Balance: 0 WA</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🪙 WA.io Token</h1>
+            <p>ماینینگ، ارجاع و سیستم پاداش روی BNB Smart Chain</p>
+            <p style="font-size: 1rem; opacity: 0.9;">مثل Pi Network اما ساده‌تر و قابل‌توسعه</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">شروع ماینینگ</button>
+                <button class="btn btn-secondary">اسناد بیشتر</button>
+            </div>
+        </div>
+    </section>
 
-  <button onclick="mine()">
-    Start Mining
-  </button>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>✨ ویژگی‌های اصلی</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⛏️</div>
+                    <h3>ماینینگ ساده</h3>
+                    <p>هر روز وارد شوید و 5 توکن بگیرید. بدون تجهیزات پیچیده!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>سیستم ارجاع</h3>
+                    <p>دوستانتان رو دعوت کنید و 10-50 توکن بگیرید برای هر نفر</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>سیستم پاداش</h3>
+                    <p>امتیاز جمع کنید و آن‌ها رو به توکن واقعی تبدیل کنید</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>امنیت کامل</h3>
+                    <p>قرارداس هوشمند تأیید شده و کیف پول Web3 آمن</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>جدول رتبه‌بندی</h3>
+                    <p>رتبه‌بندی زنده ببینید و با سایرین رقابت کنید</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>سراسری</h3>
+                    <p>از هر جای دنیا شرکت کنید، فقط یک اتصال اینترنتی لازم</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    let balance = 0;
+    <!-- Tokenomics Section -->
+    <section class="tokenomics" id="tokenomics">
+        <div class="container">
+            <h2>📈 توکن‌امیکس</h2>
+            <div class="tokenomics-content">
+                <div class="tokenomics-text">
+                    <h3>🪙 WA.io Token</h3>
+                    <p><strong>نماد:</strong> WA</p>
+                    <p><strong>شبکه:</strong> BNB Smart Chain</p>
+                    <p><strong>کل عرضه:</strong> 10 میلیارد توکن</p>
+                    <p><strong>نوع:</strong> ERC20</p>
+                    <p style="margin-top: 1.5rem; color: var(--text-dark);">
+                        توکن WA برای ماینینگ، تبدیل امتیازات و معاملات در بازار کار می‌رود.
+                    </p>
+                </div>
+                <div class="distribution">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">توزیع توکن</h3>
+                    
+                    <div class="distribution-item">
+                        <span class="distribution-label">⛏️ ماینینگ</span>
+                        <div class="distribution-bar">
+                            <div class="distribution-fill" style="width: 40%;"></div>
+                        </div>
+                        <span class="distribution-percent">40%</span>
+                    </div>
 
-    function mine() {
-      balance += 1;
-      document.querySelector("p").innerText =
-        "Balance: " + balance + " WA";
-    }
-  </script>
+                    <div class="distribution-item">
+                        <span class="distribution-label">💧 نقدینگی</span>
+                        <div class="distribution-bar">
+                            <div class="distribution-fill" style="width: 20%;"></div>
+                        </div>
+                        <span class="distribution-percent">20%</span>
+                    </div>
+
+                    <div class="distribution-item">
+                        <span class="distribution-label">🌱 اکوسیستم</span>
+                        <div class="distribution-bar">
+                            <div class="distribution-fill" style="width: 20%;"></div>
+                        </div>
+                        <span class="distribution-percent">20%</span>
+                    </div>
+
+                    <div class="distribution-item">
+                        <span class="distribution-label">👨‍💼 تیم</span>
+                        <div class="distribution-bar">
+                            <div class="distribution-fill" style="width: 10%;"></div>
+                        </div>
+                        <span class="distribution-percent">10%</span>
+                    </div>
+
+                    <div class="distribution-item">
+                        <span class="distribution-label">📦 ذخیره</span>
+                        <div class="distribution-bar">
+                            <div class="distribution-fill" style="width: 10%;"></div>
+                        </div>
+                        <span class="distribution-percent">10%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">10B</div>
+                <div class="stat-label">کل عرضه</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">کارمزد</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24h</div>
+                <div class="stat-label">دوره ماینینگ</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">کاربران</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how">
+        <div class="container">
+            <h2>🚀 نحوه کار</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>ثبت‌نام</h3>
+                    <p>یک حساب ایجاد کنید یا اتصال به MetaMask</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>شروع ماینینگ</h3>
+                    <p>دکمه ماینینگ رو کلیک کنید و امتیازات جمع کنید</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>دعوت دوستان</h3>
+                    <p>لینک ارجاع رو اشتراک کنید و بیشتر بگیرید</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>درخواست کنید</h3>
+                    <p>امتیاز رو به WA تبدیل کنید و در کیف پول دریافت کنید</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>درباره</h4>
+                <a href="#">درباره WA.io</a>
+                <a href="#">اسناد</a>
+                <a href="#">بلاگ</a>
+            </div>
+            <div class="footer-section">
+                <h4>فناوری</h4>
+                <a href="#">Smart Contract</a>
+                <a href="#">API</a>
+                <a href="#">GitHub</a>
+            </div>
+            <div class="footer-section">
+                <h4>اجتماعی</h4>
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">Telegram</a>
+            </div>
+            <div class="footer-section">
+                <h4>قانونی</h4>
+                <a href="#">شرایط استفاده</a>
+                <a href="#">حریم‌خصوصی</a>
+                <a href="#">تماس</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 WA.io Token. تمام حقوق محفوظ است.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Built with ❤️ for the crypto community</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Connect Wallet Button
+        document.querySelector('.btn-connect').addEventListener('click', function() {
+            alert('اتصال کیف پول بعداً فعال خواهد شد!');
+        });
+
+        // Start Mining Button
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            alert('صفحه ماینینگ بعداً باز خواهد شد!');
+        });
+    </script>
 </body>
 </html>
