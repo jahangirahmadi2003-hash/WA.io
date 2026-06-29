@@ -1,0 +1,32 @@
+{
+  "projectName": "World All-in-One",
+  "shortName": "WA.io",
+  "slogan": "Everything in one place – Simple, Fast, Powerful",
+  "description": "World All-in-One (WA.io) is a modern multi-purpose digital platform designed to combine different online tools, services, and features in a single unified system. The goal of WA.io is to reduce complexity for users by bringing everything they need into one smart ecosystem. Instead of using multiple websites or applications, users can access all essential services in one place with a clean, fast, and user-friendly interface.",
+  
+  "creator": "Jahangir Ahmadi",
+  
+  "features": [
+    "All-in-one digital tools platform",
+    "Fast and lightweight design",
+    "User-friendly interface",
+    "Scalable architecture for future expansion",
+    "Secure and optimized system",
+    "Multi-language support ready"
+  ],
+
+  "vision": "To become a global all-in-one digital ecosystem that connects tools, services, and people in a single platform.",
+  
+  "mission": "To simplify digital life by integrating multiple online services into one powerful and accessible platform.",
+  
+  "version": "1.0.0",
+  
+  "tags": [
+    "all-in-one",
+    "tools",
+    "platform",
+    "web app",
+    "WA.io",
+    "World All-in-One"
+  ]
+}
