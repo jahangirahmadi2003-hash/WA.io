@@ -21,6 +21,7 @@
     max-width: 420px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     overflow: hidden;
+    text-align: right; /* تراز متن داخل مدال به راست */
 }
 
 .wa-modal-header {
@@ -38,7 +39,7 @@
     padding: 1rem 1.5rem;
     display: flex;
     gap: 0.8rem;
-    justify-content: flex-end;
+    justify-content: flex-start; /* تغییر به سمت چپ برای هماهنگی با اصول RTL */
     border-top: 1px solid var(--gray-light);
 }
 
@@ -49,6 +50,8 @@
     border-radius: var(--radius-sm);
     font-size: 1rem;
     font-family: monospace;
+    direction: ltr; /* جهت ورودی کدهای ولت و انگلیسی حفظ شود */
+    text-align: left; /* تراز چپ برای آدرس ولت خواناتر است */
     transition: border-color 0.3s;
 }
 
@@ -92,7 +95,8 @@
 .wa-toast {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    left: 20px;  /* تغییر موقعیت از راست به چپ برای مزاحم نبودن در متن فارسی */
+    right: auto; /* غیرفعال کردن مقدار راست قبلی */
     padding: 1rem 1.5rem;
     border-radius: 12px;
     color: white;
@@ -102,6 +106,7 @@
     opacity: 0;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-lg);
+    text-align: right; /* تراز متن پیام به راست */
 }
 
 .wa-toast.show {
@@ -124,4 +129,4 @@
 /* Wallet button connected state */
 .btn-wallet.connected {
     background: var(--success) !important;
-    }
+}
