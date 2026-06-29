@@ -1,5 +1,4 @@
-// WA.io Wallet System - Optimized
-// No UI blocking | Async | Secure
+// WA.io Wallet System - No prompt/alert | Async | Optimized
 
 class WAWallet {
     constructor() {
@@ -24,7 +23,9 @@ class WAWallet {
         this.points = 0;
         this.lastMine = null;
         this.referrals = 0;
-        localStorage.removeItem('wa_wallet');
+        try {
+            localStorage.removeItem('wa_wallet');
+        } catch(e) {}
     }
 
     validateAddress(addr) {
@@ -32,179 +33,198 @@ class WAWallet {
     }
 
     save() {
-        const data = {
-            address: this.address,
-            points: this.points,
-            lastMine: this.lastMine,
-            referrals: this.referrals
-        };
         try {
-            localStorage.setItem('wa_wallet', JSON.stringify(data));
-        } catch (e) {
-            console.error('Save failed:', e);
-        }
+            localStorage.setItem('wa_wallet', JSON.stringify({
+                address: this.address,
+                points: this.points,
+                lastMine: this.lastMine,
+                referrals: this.referrals
+            }));
+        } catch(e) {}
     }
 
     load() {
         try {
             const data = localStorage.getItem('wa_wallet');
             if (data) {
-                const parsed = JSON.parse(data);
-                this.address = parsed.address || null;
-                this.points = parsed.points || 0;
-                this.lastMine = parsed.lastMine || null;
-                this.referrals = parsed.referrals || 0;
+                const p = JSON.parse(data);
+                this.address = p.address || null;
+                this.points = p.points || 0;
+                this.lastMine = p.lastMine || null;
+                this.referrals = p.referrals || 0;
             }
-        } catch (e) {
-            console.error('Load failed:', e);
-            this.reset();
-        }
-    }
-
-    reset() {
-        this.address = null;
-        this.points = 0;
-        this.lastMine = null;
-        this.referrals = 0;
+        } catch(e) {}
     }
 }
 
-// Create wallet instance
 const wallet = new WAWallet();
 
-// ==================== UI Functions ====================
+// ==================== MODAL SYSTEM (No prompt/alert) ====================
+function createModal(title, content, buttons) {
+    // Remove existing modal
+    const existing = document.querySelector('.wa-modal-overlay');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'wa-modal-overlay';
+    overlay.innerHTML = `
+        <div class="wa-modal">
+            <div class="wa-modal-header">${title}</div>
+            <div class="wa-modal-body">${content}</div>
+            <div class="wa-modal-footer"></div>
+        </div>
+    `;
+
+    const footer = overlay.querySelector('.wa-modal-footer');
+    
+    buttons.forEach(btn => {
+        const button = document.createElement('button');
+        button.className = btn.class || 'btn-modal';
+        button.textContent = btn.text;
+        button.addEventListener('click', () => {
+            overlay.remove();
+            if (btn.callback) btn.callback();
+        });
+        footer.appendChild(button);
+    });
+
+    // Close on overlay click
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+    });
+
+    document.body.appendChild(overlay);
+}
+
+function showToast(message, type = 'info') {
+    const existing = document.querySelector('.wa-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `wa-toast wa-toast-${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    });
+}
+
+// ==================== WALLET UI ====================
 function updateWalletUI() {
     const btn = document.getElementById('walletBtn');
     const text = document.getElementById('walletText');
-    
     if (!btn || !text) return;
-    
+
     if (wallet.address) {
-        const short = wallet.address.substring(0, 6) + '...' + wallet.address.substring(38);
-        text.textContent = short;
+        text.textContent = wallet.address.substring(0,6) + '...' + wallet.address.substring(38);
         btn.classList.add('connected');
-        btn.title = 'کلیک برای مشاهده اطلاعات';
     } else {
         text.textContent = 'اتصال کیف پول';
         btn.classList.remove('connected');
-        btn.title = '';
     }
 }
 
-function showWalletInfo() {
-    if (!wallet.address) return;
-    
-    const msg = [
-        `آدرس: ${wallet.address}`,
-        `امتیاز: ${wallet.points.toLocaleString()}`,
-        `دعوت‌ها: ${wallet.referrals}`,
-        '',
-        'برای قطع اتصال، دکمه را نگه دارید'
-    ].join('\n');
-    
-    alert(msg);
+function showConnectModal() {
+    createModal(
+        '🔗 اتصال کیف پول',
+        `
+            <p style="margin-bottom:1rem">آدرس کیف پول BSC خود را وارد کنید:</p>
+            <input type="text" id="walletInput" class="wa-input" placeholder="0x..." autocomplete="off" spellcheck="false">
+            <p style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem">مثال: 0x1234...5678</p>
+        `,
+        [
+            {
+                text: 'انصراف',
+                class: 'btn-modal-cancel'
+            },
+            {
+                text: 'اتصال',
+                class: 'btn-modal-primary',
+                callback: () => {
+                    const input = document.getElementById('walletInput');
+                    if (!input) return;
+                    const addr = input.value.trim();
+                    
+                    if (!addr) {
+                        showToast('لطفاً آدرس را وارد کنید', 'error');
+                        return;
+                    }
+                    
+                    if (wallet.connect(addr)) {
+                        updateWalletUI();
+                        showToast('✅ کیف پول با موفقیت متصل شد!', 'success');
+                    } else {
+                        showToast('❌ آدرس نامعتبر است!', 'error');
+                    }
+                }
+            }
+        ]
+    );
+
+    // Auto focus input
+    setTimeout(() => {
+        const input = document.getElementById('walletInput');
+        if (input) input.focus();
+    }, 200);
 }
 
-function showConnectDialog() {
-    // Use a fast, non-blocking approach
-    const addr = window.prompt('آدرس کیف پول BSC خود را وارد کنید:\n(مثال: 0x...)');
-    
-    if (!addr) return;
-    
-    const trimmed = addr.trim();
-    
-    if (!trimmed) return;
-    
-    if (wallet.connect(trimmed)) {
-        updateWalletUI();
-        // Use requestAnimationFrame to avoid INP issues
-        requestAnimationFrame(() => {
-            alert('✅ کیف پول با موفقیت متصل شد!');
-        });
-    } else {
-        requestAnimationFrame(() => {
-            alert('❌ آدرس نامعتبر است!\nآدرس باید با 0x شروع شود و ۴۰ کاراکتر باشد');
-        });
-    }
+function showWalletInfoModal() {
+    createModal(
+        '👛 اطلاعات کیف پول',
+        `
+            <div style="text-align:center">
+                <p><strong>آدرس:</strong></p>
+                <p style="font-size:0.85rem;word-break:break-all;background:var(--light);padding:0.5rem;border-radius:8px;margin:0.5rem 0">${wallet.address}</p>
+                <hr style="margin:1rem 0">
+                <p><strong>امتیاز:</strong> ${wallet.points.toLocaleString()}</p>
+                <p><strong>دعوت‌ها:</strong> ${wallet.referrals}</p>
+            </div>
+        `,
+        [
+            {
+                text: 'قطع اتصال',
+                class: 'btn-modal-danger',
+                callback: () => {
+                    wallet.disconnect();
+                    updateWalletUI();
+                    showToast('کیف پول قطع شد', 'info');
+                }
+            },
+            {
+                text: 'بستن',
+                class: 'btn-modal-cancel'
+            }
+        ]
+    );
 }
 
-function handleDisconnect() {
-    if (!wallet.address) return;
-    
-    if (confirm('آیا مطمئن هستید که می‌خواهید کیف پول را قطع کنید؟\nامتیازات شما ذخیره می‌شوند.')) {
-        wallet.disconnect();
-        updateWalletUI();
-        requestAnimationFrame(() => {
-            alert('کیف پول قطع شد. امتیازات شما پاک شد.');
-        });
-    }
-}
+// ==================== EVENT LISTENERS (Debounced) ====================
+let walletClickLock = false;
 
-// ==================== Event Listeners ====================
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('walletBtn');
-    
     if (!btn) return;
-    
-    // Single click - connect or show info
+
     btn.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         
-        if (wallet.address) {
-            showWalletInfo();
-        } else {
-            // Use setTimeout to avoid blocking the main thread
-            setTimeout(() => {
-                showConnectDialog();
-            }, 100);
-        }
-    });
-    
-    // Long press - disconnect
-    let pressTimer;
-    btn.addEventListener('mousedown', () => {
-        if (wallet.address) {
-            pressTimer = setTimeout(() => {
-                handleDisconnect();
-            }, 1500);
-        }
-    });
-    
-    btn.addEventListener('mouseup', () => {
-        clearTimeout(pressTimer);
-    });
-    
-    btn.addEventListener('mouseleave', () => {
-        clearTimeout(pressTimer);
-    });
-    
-    // Touch events for mobile
-    btn.addEventListener('touchstart', () => {
-        if (wallet.address) {
-            pressTimer = setTimeout(() => {
-                handleDisconnect();
-            }, 1500);
-        }
-    });
-    
-    btn.addEventListener('touchend', () => {
-        clearTimeout(pressTimer);
-    });
-    
-    // Initial UI update
-    updateWalletUI();
-});
+        // Prevent double-click issues
+        if (walletClickLock) return;
+        walletClickLock = true;
+        setTimeout(() => { walletClickLock = false; }, 500);
 
-// Keyboard shortcut: Ctrl+W to connect/disconnect
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 'w') {
-        e.preventDefault();
         if (wallet.address) {
-            handleDisconnect();
+            showWalletInfoModal();
         } else {
-            setTimeout(() => {
-                showConnectDialog();
-            }, 100);
+            showConnectModal();
         }
-    }
+    });
+
+    updateWalletUI();
 });
