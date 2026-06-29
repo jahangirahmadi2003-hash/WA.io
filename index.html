@@ -9,87 +9,303 @@
     
     <title>WA.io Token - ماینینگ و سیستم پاداش</title>
     
-    <!-- Global CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/animations.css">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7989403305267753"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7989403305267753" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Header Component -->
-    <div id="header-container"></div>
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-bolt"></i> WA.io
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#features">ویژگی‌ها</a></li>
+                <li><a href="#tokenomics">توکن‌امیکس</a></li>
+                <li><a href="#how">نحوه کار</a></li>
+                <li><a href="#rewards">پاداش‌ها</a></li>
+                <li><a href="#contact">تماس</a></li>
+            </ul>
+            
+            <div class="header-actions">
+                <button class="btn-lang">
+                    <i class="fas fa-globe"></i> فارسی
+                </button>
+                <button class="btn-wallet">
+                    <i class="fas fa-wallet"></i> اتصال کیف پول
+                </button>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Hero Component -->
-    <div id="hero-container"></div>
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> روی BNB Smart Chain
+                </div>
+                <h1>WA.io Token</h1>
+                <p>پلتفرم غیرمتمرکز ماینینگ، ارجاع و پاداش</p>
+                <p class="hero-sub">مثل Pi Network اما ساده‌تر، سریع‌تر و قابل‌توسعه</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-play-circle"></i> شروع ماینینگ
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-book"></i> اسناد بیشتر
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">10B</span>
+                        <span class="hero-stat-label">کل عرضه</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">0%</span>
+                        <span class="hero-stat-label">کارمزد</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">24h</span>
+                        <span class="hero-stat-label">ماینینگ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Features Component -->
-    <div id="features-container"></div>
+    <!-- ==================== FEATURES ==================== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">ویژگی‌ها</span>
+                <h2>چرا WA.io Token؟</h2>
+                <p>همه چیز برای شروع ماینینگ و کسب درآمد آماده است</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>ماینینگ ساده</h3>
+                    <p>هر روز وارد شوید و 5 توکن WA دریافت کنید. بدون نیاز به تجهیزات گران‌قیمت</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>سیستم ارجاع</h3>
+                    <p>دوستان خود را دعوت کنید و 10 تا 50 توکن به ازای هر نفر دریافت کنید</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>سیستم پاداش</h3>
+                    <p>امتیازات خود را جمع کنید و به توکن‌های واقعی WA تبدیل کنید</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>امنیت بالا</h3>
+                    <p>قرارداد هوشمند تأیید شده و کیف پول Web3 کاملاً امن</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-simple"></i>
+                    </div>
+                    <h3>جدول رتبه‌بندی</h3>
+                    <p>رتبه‌بندی زنده کاربران را ببینید و با دیگران رقابت کنید</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>جهانی و بدون مرز</h3>
+                    <p>از هر جای دنیا شرکت کنید، فقط یک اتصال اینترنت کافی است</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Tokenomics Component -->
-    <div id="tokenomics-container"></div>
+    <!-- ==================== REWARDS ==================== -->
+    <section class="rewards" id="rewards">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">پاداش‌ها</span>
+                <h2>سیستم پاداش دهی</h2>
+                <p>با فعالیت در WA.io پاداش‌های متنوع دریافت کنید</p>
+            </div>
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>پاداش روزانه</h3>
+                    <p>هر روز لاگین کنید و 5 توکن رایگان بگیرید</p>
+                    <div class="reward-amount">+5 WA</div>
+                </div>
+                <div class="reward-card featured">
+                    <div class="reward-badge">محبوب</div>
+                    <div class="reward-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>پاداش ارجاع</h3>
+                    <p>با دعوت هر دوست 10 توکن هدیه بگیرید</p>
+                    <div class="reward-amount">+10 WA</div>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>پاداش وفاداری</h3>
+                    <p>هر ماه فعالیت مداوم 100 توکن جایزه</p>
+                    <div class="reward-amount">+100 WA</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Stats Component -->
-    <div id="stats-container"></div>
+    <!-- ==================== TOKENOMICS ==================== -->
+    <section class="tokenomics" id="tokenomics">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">توکن‌امیکس</span>
+                <h2>اقتصاد توکن WA</h2>
+                <p>توزیع شفاف و عادلانه توکن‌ها</p>
+            </div>
+            <div class="tokenomics-content">
+                <div class="tokenomics-info">
+                    <div class="token-card">
+                        <h3><i class="fas fa-coins"></i> WA Token</h3>
+                        <ul>
+                            <li><strong>نماد:</strong> WA</li>
+                            <li><strong>شبکه:</strong> BNB Smart Chain (BEP-20)</li>
+                            <li><strong>کل عرضه:</strong> 10,000,000,000</li>
+                            <li><strong>نوع:</strong> Utility Token</li>
+                        </ul>
+                        <p>توکن WA برای ماینینگ، تبدیل امتیازات و معاملات در بازار استفاده می‌شود.</p>
+                    </div>
+                </div>
+                <div class="distribution">
+                    <h3>توزیع توکن</h3>
+                    <div class="dist-item">
+                        <div class="dist-label"><i class="fas fa-microchip"></i> ماینینگ</div>
+                        <div class="dist-bar"><div class="dist-fill" style="width:40%"></div></div>
+                        <div class="dist-percent">40%</div>
+                    </div>
+                    <div class="dist-item">
+                        <div class="dist-label"><i class="fas fa-droplet"></i> نقدینگی</div>
+                        <div class="dist-bar"><div class="dist-fill" style="width:20%"></div></div>
+                        <div class="dist-percent">20%</div>
+                    </div>
+                    <div class="dist-item">
+                        <div class="dist-label"><i class="fas fa-seedling"></i> اکوسیستم</div>
+                        <div class="dist-bar"><div class="dist-fill" style="width:20%"></div></div>
+                        <div class="dist-percent">20%</div>
+                    </div>
+                    <div class="dist-item">
+                        <div class="dist-label"><i class="fas fa-user-tie"></i> تیم</div>
+                        <div class="dist-bar"><div class="dist-fill" style="width:10%"></div></div>
+                        <div class="dist-percent">10%</div>
+                    </div>
+                    <div class="dist-item">
+                        <div class="dist-label"><i class="fas fa-box-archive"></i> ذخیره</div>
+                        <div class="dist-bar"><div class="dist-fill" style="width:10%"></div></div>
+                        <div class="dist-percent">10%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- How It Works Component -->
-    <div id="how-it-works-container"></div>
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how-it-works" id="how">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">راهنما</span>
+                <h2>نحوه کار با WA.io</h2>
+                <p>۴ قدم ساده تا شروع ماینینگ</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>ثبت‌نام</h3>
+                    <p>حساب کاربری ایجاد کنید یا با MetaMask وارد شوید</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>شروع ماینینگ</h3>
+                    <p>دکمه ماینینگ را بزنید و امتیاز جمع کنید</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>دعوت دوستان</h3>
+                    <p>لینک ارجاع خود را به اشتراک بگذارید</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>دریافت پاداش</h3>
+                    <p>امتیازات را به توکن WA تبدیل کنید</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Rewards Component -->
-    <div id="rewards-container"></div>
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fas fa-bolt"></i> WA.io</h3>
+                    <p>پلتفرم غیرمتمرکز ماینینگ و پاداش روی BNB Smart Chain</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>درباره</h4>
+                    <a href="#">درباره ما</a>
+                    <a href="#">اسناد</a>
+                    <a href="#">بلاگ</a>
+                </div>
+                <div class="footer-col">
+                    <h4>قانونی</h4>
+                    <a href="terms.html">شرایط استفاده</a>
+                    <a href="privacy.html">حریم خصوصی</a>
+                    <a href="#">تماس با ما</a>
+                </div>
+                <div class="footer-col">
+                    <h4>فناوری</h4>
+                    <a href="#">Smart Contract</a>
+                    <a href="#">API</a>
+                    <a href="#">GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WA.io Token. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Footer Component -->
-    <div id="footer-container"></div>
-
-    <!-- Core JavaScript -->
-    <script src="js/translations.js"></script>
-    <script src="js/language.js"></script>
+    <!-- JavaScript -->
     <script src="js/app.js"></script>
-    <script src="js/wallet.js"></script>
-    <script src="js/mining.js"></script>
-    <script src="js/security.js"></script>
-    
-    <!-- Component Loader -->
-    <script>
-        // Load component function
-        async function loadComponent(name, container) {
-            try {
-                const response = await fetch(`components/${name}/${name}.html`);
-                const html = await response.text();
-                document.getElementById(container).innerHTML = html;
-                
-                // Load component CSS
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = `components/${name}/${name}.css`;
-                document.head.appendChild(link);
-                
-                // Load component JS
-                const script = document.createElement('script');
-                script.src = `components/${name}/${name}.js`;
-                script.defer = true;
-                document.body.appendChild(script);
-            } catch (error) {
-                console.error(`Error loading ${name}:`, error);
-            }
-        }
-
-        // Load all components
-        async function loadAllComponents() {
-            await loadComponent('header', 'header-container');
-            await loadComponent('hero', 'hero-container');
-            await loadComponent('features', 'features-container');
-            await loadComponent('tokenomics', 'tokenomics-container');
-            await loadComponent('stats', 'stats-container');
-            await loadComponent('how-it-works', 'how-it-works-container');
-            await loadComponent('rewards', 'rewards-container');
-            await loadComponent('footer', 'footer-container');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', loadAllComponents);
-    </script>
 </body>
 </html>
