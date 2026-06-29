@@ -1,4 +1,4 @@
-// WA.io Mining System - Optimized
+// WA.io Mining System - No alert
 
 class MiningSystem {
     constructor() {
@@ -20,22 +20,17 @@ class MiningSystem {
         if (diff <= 0) return '۰ دقیقه';
         const hours = Math.floor(diff / (60 * 60 * 1000));
         const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-        return `${hours} ساعت و ${minutes} دقیقه`;
+        return `${hours}h ${minutes}m`;
     }
 
     mine() {
         if (!wallet.address) {
-            requestAnimationFrame(() => {
-                alert('ابتدا کیف پول خود را متصل کنید!');
-            });
+            showToast('ابتدا کیف پول خود را متصل کنید!', 'error');
             return false;
         }
 
         if (!this.canMine()) {
-            const remaining = this.getRemainingTime();
-            requestAnimationFrame(() => {
-                alert(`⏳ باید ${remaining} صبر کنید`);
-            });
+            showToast(`⏳ ${this.getRemainingTime()} صبر کنید`, 'info');
             return false;
         }
 
@@ -43,41 +38,24 @@ class MiningSystem {
         wallet.lastMine = Date.now();
         wallet.save();
 
-        requestAnimationFrame(() => {
-            alert(`✅ ${this.baseReward} امتیاز دریافت کردید!\nکل امتیاز: ${wallet.points.toLocaleString()}`);
-        });
-        
+        showToast(`✅ +${this.baseReward} امتیاز | کل: ${wallet.points.toLocaleString()}`, 'success');
         return true;
-    }
-
-    addReferral() {
-        wallet.points += this.referralReward;
-        wallet.referrals++;
-        wallet.save();
     }
 }
 
 const mining = new MiningSystem();
 
-// Start button with debounce
-let miningInProgress = false;
+let miningLock = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const startBtn = document.getElementById('startBtn');
-    
-    if (!startBtn) return;
-    
-    startBtn.addEventListener('click', (e) => {
+    const btn = document.getElementById('startBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        if (miningInProgress) return;
-        
-        miningInProgress = true;
-        
-        // Non-blocking mining
-        setTimeout(() => {
-            mining.mine();
-            miningInProgress = false;
-        }, 50);
+        if (miningLock) return;
+        miningLock = true;
+        mining.mine();
+        setTimeout(() => { miningLock = false; }, 3000);
     });
 });
