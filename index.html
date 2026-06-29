@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-title" content="WA.io">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="WA.io">
-    <meta name="theme-color" content="#3b82f6">
+    <meta name="theme-color" content="#0f172a">
     <meta name="msapplication-TileColor" content="#3b82f6">
     
     <!-- iOS Icons -->
@@ -22,10 +22,10 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
     
-    <meta name="description" content="WA.io - پلتفرم غیرمتمرکز امتیازدهی">
-    <title>WA.io - پلتفرم امتیازدهی</title>
+    <meta name="description" content="WA.io - پلتفرم غیرمتمرکز ماینینگ و بلاکچین">
+    <title>WA.io - پلتفرم ماینینگ و بلاکچین</title>
     
-    <!-- CSS (با / از ریشه) -->
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="/css/animations.css">
@@ -36,26 +36,268 @@
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7989403305267753" crossorigin="anonymous"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #3b82f6; --primary-dark: #1d4ed8; --secondary: #8b5cf6; --accent: #f59e0b;
+            --dark: #0f172a; --darker: #020617; --light: #f8fafc; --gray: #64748b;
+            --gray-light: #e2e8f0; --success: #10b981; --danger: #ef4444; --white: #ffffff;
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --radius: 16px; --radius-sm: 8px;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.7; color: var(--dark); background: var(--light);
+            overflow-x: hidden; -webkit-tap-highlight-color: transparent;
+            padding-top: env(safe-area-inset-top);
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* ========== LIVE TICKER ========== */
+        .live-ticker {
+            background: var(--darker); color: white; padding: 0.5rem 0;
+            font-size: 0.8rem; overflow: hidden; border-bottom: 1px solid #1e293b;
+        }
+        .ticker-wrap {
+            display: flex; gap: 3rem; animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-item { display: flex; gap: 0.5rem; align-items: center; }
+        .ticker-up { color: var(--success); }
+        .ticker-down { color: var(--danger); }
+
+        /* ========== HEADER ========== */
+        header {
+            background: rgba(15,23,42,0.95); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000;
+        }
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 70px; gap: 1rem;
+        }
+        .logo {
+            font-size: 1.6rem; font-weight: 900; text-decoration: none;
+            background: var(--gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; white-space: nowrap;
+        }
+        .nav-links { display: flex; list-style: none; gap: 1.5rem; }
+        .nav-links a {
+            color: #cbd5e1; text-decoration: none; font-weight: 500;
+            font-size: 0.85rem; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: white; }
+        .header-actions { display: flex; gap: 0.5rem; align-items: center; }
+        .btn-wallet {
+            background: var(--gradient); color: white; padding: 0.5rem 1.2rem;
+            border: none; border-radius: 50px; cursor: pointer; font-weight: 600;
+            font-size: 0.8rem; transition: all 0.3s; box-shadow: var(--shadow);
+        }
+        .btn-wallet:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn-wallet.connected { background: var(--success) !important; }
+        .btn-lang {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 0.4rem 0.8rem; border-radius: 50px;
+            cursor: pointer; font-size: 0.75rem;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            background: var(--darker); color: white; padding: 5rem 1.5rem;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(59,130,246,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(139,92,246,0.15) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-block; background: rgba(59,130,246,0.2);
+            padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.8rem;
+            margin-bottom: 1.5rem; border: 1px solid rgba(59,130,246,0.3);
+        }
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 900;
+            background: var(--gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; margin-bottom: 1rem;
+        }
+        .hero p { font-size: 1.1rem; color: #94a3b8; margin-bottom: 0.5rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0; }
+        .btn {
+            padding: 0.8rem 2rem; border: none; border-radius: 50px;
+            cursor: pointer; font-weight: 600; font-size: 0.95rem;
+            transition: all 0.3s; text-decoration: none; display: inline-flex;
+            align-items: center; gap: 0.5rem;
+        }
+        .btn-primary { background: var(--gradient); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
+        .btn-outline:hover { background: white; color: var(--dark); }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+            background: rgba(255,255,255,0.05); border-radius: var(--radius);
+            padding: 1.5rem; max-width: 700px; margin: 0 auto;
+        }
+        .hero-stat { text-align: center; min-width: 100px; }
+        .hero-stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+        .hero-stat-label { font-size: 0.75rem; color: #64748b; }
+
+        /* ========== SECTION HEADER ========== */
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-badge {
+            display: inline-block; background: rgba(59,130,246,0.1);
+            color: var(--primary); padding: 0.4rem 1.2rem; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem;
+        }
+        .section-header h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--darker); }
+        .section-header p { color: var(--gray); font-size: 1rem; }
+
+        /* ========== CALCULATOR ========== */
+        .calculator {
+            padding: 4rem 1.5rem; background: white;
+        }
+        .calc-box {
+            background: var(--light); padding: 2rem; border-radius: var(--radius);
+            border: 1px solid var(--gray-light); max-width: 600px; margin: 0 auto;
+        }
+        .calc-row { margin-bottom: 1.5rem; }
+        .calc-row label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .calc-row input[type="range"] { width: 100%; accent-color: var(--primary); }
+        .calc-row input[type="number"] {
+            width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--gray-light);
+            border-radius: var(--radius-sm); font-size: 0.9rem;
+        }
+        .calc-result {
+            background: var(--gradient); color: white; padding: 1.5rem;
+            border-radius: var(--radius-sm); text-align: center; margin-top: 1rem;
+        }
+        .calc-result h3 { font-size: 1.8rem; font-weight: 900; }
+
+        /* ========== EXPLORER ========== */
+        .explorer {
+            padding: 4rem 1.5rem; background: var(--darker); color: white;
+        }
+        .explorer .section-header h2 { color: white; }
+        .explorer .section-header p { color: #94a3b8; }
+        .explorer-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        .explorer-card {
+            background: rgba(255,255,255,0.05); border-radius: var(--radius);
+            padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .explorer-card h3 { margin-bottom: 1rem; font-size: 1.1rem; color: var(--accent); }
+        .explorer-table { width: 100%; font-size: 0.8rem; border-collapse: collapse; }
+        .explorer-table th { text-align: right; color: #64748b; padding: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .explorer-table td { padding: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tx-hash { color: var(--primary); font-family: monospace; font-size: 0.75rem; }
+
+        /* ========== RIGS ========== */
+        .rigs {
+            padding: 4rem 1.5rem; background: white;
+        }
+        .rigs-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+        }
+        .rig-card {
+            background: var(--light); border-radius: var(--radius); padding: 1.5rem;
+            border: 1px solid var(--gray-light); transition: all 0.3s;
+        }
+        .rig-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .rig-card h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .rig-specs { list-style: none; font-size: 0.85rem; color: var(--gray); }
+        .rig-specs li { padding: 0.3rem 0; display: flex; justify-content: space-between; }
+        .rig-profit { color: var(--success); font-weight: 700; font-size: 1.2rem; margin-top: 1rem; }
+
+        /* ========== BLOG ========== */
+        .blog { padding: 4rem 1.5rem; background: var(--light); }
+        .blog-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+        }
+        .blog-card {
+            background: white; border-radius: var(--radius); overflow: hidden;
+            border: 1px solid var(--gray-light); transition: all 0.3s;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .blog-img { height: 180px; background: var(--gradient); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; }
+        .blog-body { padding: 1.5rem; }
+        .blog-body h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .blog-body p { color: var(--gray); font-size: 0.85rem; }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--darker); color: white; padding: 4rem 1.5rem 2rem;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-col h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+        .footer-col p { color: var(--gray); font-size: 0.85rem; }
+        .footer-col h4 { color: var(--accent); margin-bottom: 1rem; font-size: 0.9rem; }
+        .footer-col a { display: block; color: var(--gray); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; transition: color 0.3s; }
+        .footer-col a:hover { color: white; }
+        .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+        .social-links a {
+            width: 36px; height: 36px; background: rgba(255,255,255,0.1);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; color: white; transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary); }
+        .footer-bottom { border-top: 1px solid #1e293b; padding-top: 1.5rem; text-align: center; color: var(--gray); font-size: 0.8rem; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            nav { flex-direction: column; height: auto; padding: 1rem 0; }
+            .nav-links { gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+            .explorer-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-links { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
+    <!-- ==================== LIVE TICKER ==================== -->
+    <div class="live-ticker">
+        <div class="container">
+            <div class="ticker-wrap" id="tickerWrap">
+                <span class="ticker-item">₿ BTC: $67,890.00 <span class="ticker-up">+2.34%</span></span>
+                <span class="ticker-item">Ξ ETH: $3,456.00 <span class="ticker-up">+1.89%</span></span>
+                <span class="ticker-item">◈ BNB: $598.00 <span class="ticker-down">-0.45%</span></span>
+                <span class="ticker-item">⛏️ Hashrate: 650 EH/s</span>
+                <span class="ticker-item">📊 Difficulty: 83.15T</span>
+                <span class="ticker-item">🎁 Block Reward: 3.125 BTC</span>
+                <span class="ticker-item">₿ BTC: $67,890.00 <span class="ticker-up">+2.34%</span></span>
+                <span class="ticker-item">Ξ ETH: $3,456.00 <span class="ticker-up">+1.89%</span></span>
+                <span class="ticker-item">◈ BNB: $598.00 <span class="ticker-down">-0.45%</span></span>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== HEADER ==================== -->
     <header>
         <nav class="container">
-            <a href="#" class="logo">
-                <i class="fas fa-bolt"></i> WA.io
-            </a>
-            
+            <a href="#" class="logo"><i class="fas fa-bolt"></i> WA.io</a>
             <ul class="nav-links">
-                <li><a href="#features">ویژگی‌ها</a></li>
-                <li><a href="#points">امتیازات</a></li>
-                <li><a href="#how">نحوه کار</a></li>
+                <li><a href="#calc">ماشین‌حساب</a></li>
+                <li><a href="#explorer">کاوشگر</a></li>
+                <li><a href="#rigs">تجهیزات</a></li>
+                <li><a href="#blog">آموزش</a></li>
                 <li><a href="#contact">تماس</a></li>
             </ul>
-            
             <div class="header-actions">
-                <button class="btn-lang">
-                    <i class="fas fa-globe"></i> FA
-                </button>
+                <button class="btn-lang"><i class="fas fa-globe"></i> FA</button>
                 <button class="btn-wallet" id="walletBtn">
                     <i class="fas fa-wallet"></i> <span id="walletText">اتصال کیف پول</span>
                 </button>
@@ -65,144 +307,153 @@
 
     <!-- ==================== HERO ==================== -->
     <section class="hero">
-        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-shield-halved"></i> شبکه غیرمتمرکز WA</div>
+            <h1>WA.io</h1>
+            <p>پلتفرم ماینینگ، بلاکچین و سیستم پاداش</p>
+            <p style="font-size:0.9rem;color:#64748b;">امتیاز جمع کنید | بلاک‌ها را کاوش کنید | سودآوری را محاسبه کنید</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="startBtn"><i class="fas fa-microchip"></i> شروع ماینینگ</button>
+                <a href="https://t.me/WAioToken" target="_blank" class="btn btn-outline"><i class="fab fa-telegram"></i> کامیونیتی</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="hero-stat-num">10B</span><span class="hero-stat-label">عرضه ثابت</span></div>
+                <div class="hero-stat"><span class="hero-stat-num">0%</span><span class="hero-stat-label">تورم</span></div>
+                <div class="hero-stat"><span class="hero-stat-num">24h</span><span class="hero-stat-label">دوره ماینینگ</span></div>
+                <div class="hero-stat"><span class="hero-stat-num">∞</span><span class="hero-stat-label">مقیاس‌پذیری</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CALCULATOR ==================== -->
+    <section class="calculator" id="calc">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-shield-halved"></i> غیرمتمرکز و امن
+            <div class="section-header">
+                <span class="section-badge">ماشین‌حساب</span>
+                <h2>ماشین‌حساب سودآوری</h2>
+                <p>درآمد روزانه، ماهانه و سالانه خود را محاسبه کنید</p>
+            </div>
+            <div class="calc-box">
+                <div class="calc-row">
+                    <label>هش‌ریت (TH/s): <span id="hashVal">100</span></label>
+                    <input type="range" min="1" max="500" value="100" id="hashInput" oninput="updateCalc()">
                 </div>
-                <h1>WA.io</h1>
-                <p>پلتفرم امتیازدهی غیرمتمرکز</p>
-                <p class="hero-sub">امتیاز جمع کنید، در آینده به توکن تبدیل کنید</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" id="startBtn">
-                        <i class="fas fa-bolt"></i> شروع جمع‌آوری امتیاز
-                    </button>
-                    <a href="https://t.me/WAioToken" target="_blank" class="btn btn-outline">
-                        <i class="fab fa-telegram"></i> کانال تلگرام
-                    </a>
+                <div class="calc-row">
+                    <label>توان مصرفی (وات): <span id="powerVal">3250</span></label>
+                    <input type="range" min="500" max="10000" value="3250" id="powerInput" oninput="updateCalc()">
                 </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat-num counter" data-target="10000000000">10,000,000,000</span>
-                        <span class="hero-stat-label">عرضه ثابت</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-num">0%</span>
-                        <span class="hero-stat-label">تورم</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-num" id="totalUsers">۰</span>
-                        <span class="hero-stat-label">کاربر فعال</span>
-                    </div>
+                <div class="calc-row">
+                    <label>هزینه برق ($/kWh):</label>
+                    <input type="number" value="0.05" id="electricityInput" step="0.01" oninput="updateCalc()">
+                </div>
+                <div class="calc-result">
+                    <p>سود روزانه تخمینی:</p>
+                    <h3 id="dailyProfit">$12.50</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== FEATURES ==================== -->
-    <section class="features" id="features">
+    <!-- ==================== EXPLORER ==================== -->
+    <section class="explorer" id="explorer">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">ویژگی‌ها</span>
-                <h2>سیستم امتیازدهی WA</h2>
-                <p>امتیازات خود را جمع‌آوری کنید و در آینده تبدیل کنید</p>
+                <span class="section-badge">کاوشگر</span>
+                <h2>کاوشگر بلاکچین WA</h2>
+                <p>آخرین بلاک‌ها و تراکنش‌های شبکه</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
-                    <h3>امتیاز روزانه</h3>
-                    <p>هر ۲۴ ساعت وارد شوید و امتیاز رایگان دریافت کنید</p>
+            <div class="explorer-grid">
+                <div class="explorer-card">
+                    <h3>⛓️ آخرین بلاک‌ها</h3>
+                    <table class="explorer-table">
+                        <tr><th>ارتفاع</th><th>زمان</th><th>تراکنش‌ها</th><th>ماینر</th></tr>
+                        <tr><td>#1,234,567</td><td>۲ دقیقه پیش</td><td>2,345</td><td>0x1234...abcd</td></tr>
+                        <tr><td>#1,234,566</td><td>۵ دقیقه پیش</td><td>1,892</td><td>0x5678...efgh</td></tr>
+                        <tr><td>#1,234,565</td><td>۸ دقیقه پیش</td><td>3,120</td><td>0x9012...ijkl</td></tr>
+                    </table>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-users"></i></div>
-                    <h3>امتیاز ارجاع</h3>
-                    <p>دوستان خود را دعوت کنید و امتیاز بیشتر بگیرید</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
-                    <h3>امنیت کوانتومی</h3>
-                    <p>محافظت شده با رمزنگاری مقاوم در برابر کوانتوم</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-coins"></i></div>
-                    <h3>عرضه ثابت</h3>
-                    <p>۱۰ میلیارد واحد ثابت، بدون تورم</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                    <h3>قفل امن</h3>
-                    <p>تا زمان عرضه رسمی، برداشت غیرممکن است</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mobile-screen"></i></div>
-                    <h3>آماده برای اپ</h3>
-                    <p>به زودی اپلیکیشن موبایل منتشر می‌شود</p>
+                <div class="explorer-card">
+                    <h3>💸 آخرین تراکنش‌ها</h3>
+                    <table class="explorer-table">
+                        <tr><th>TxID</th><th>مقدار</th><th>زمان</th></tr>
+                        <tr><td><span class="tx-hash">0xabcd...1234</span></td><td>1.5 WA</td><td>۱ دقیقه پیش</td></tr>
+                        <tr><td><span class="tx-hash">0xefgh...5678</span></td><td>50 WA</td><td>۳ دقیقه پیش</td></tr>
+                        <tr><td><span class="tx-hash">0xijkl...9012</span></td><td>10 WA</td><td>۶ دقیقه پیش</td></tr>
+                    </table>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== POINTS SYSTEM ==================== -->
-    <section class="points" id="points">
+    <!-- ==================== RIGS ==================== -->
+    <section class="rigs" id="rigs">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">امتیازات</span>
-                <h2>سیستم امتیازدهی</h2>
-                <p>هر امتیاز = یک واحد در آینده</p>
+                <span class="section-badge">تجهیزات</span>
+                <h2>تجهیزات ماینینگ</h2>
+                <p>بهترین دستگاه‌های استخراج رمزارز</p>
             </div>
-            <div class="points-grid">
-                <div class="point-card">
-                    <div class="point-icon"><i class="fas fa-calendar-check"></i></div>
-                    <h3>امتیاز پایه</h3>
-                    <p>هر ۲۴ ساعت یکبار</p>
-                    <div class="point-amount">+۵ امتیاز</div>
+            <div class="rigs-grid">
+                <div class="rig-card">
+                    <h3>⚡ Antminer S21</h3>
+                    <ul class="rig-specs">
+                        <li><span>الگوریتم</span><span>SHA-256</span></li>
+                        <li><span>هش‌ریت</span><span>200 TH/s</span></li>
+                        <li><span>مصرف</span><span>3250W</span></li>
+                    </ul>
+                    <p class="rig-profit">$15.20/روز</p>
                 </div>
-                <div class="point-card featured">
-                    <div class="point-badge">پرطرفدار</div>
-                    <div class="point-icon"><i class="fas fa-user-plus"></i></div>
-                    <h3>امتیاز دعوت</h3>
-                    <p>به ازای هر دعوت موفق</p>
-                    <div class="point-amount">+۱۰ امتیاز</div>
+                <div class="rig-card">
+                    <h3>⚡ Whatsminer M60</h3>
+                    <ul class="rig-specs">
+                        <li><span>الگوریتم</span><span>SHA-256</span></li>
+                        <li><span>هش‌ریت</span><span>180 TH/s</span></li>
+                        <li><span>مصرف</span><span>3420W</span></li>
+                    </ul>
+                    <p class="rig-profit">$13.10/روز</p>
                 </div>
-                <div class="point-card">
-                    <div class="point-icon"><i class="fas fa-award"></i></div>
-                    <h3>امتیاز وفاداری</h3>
-                    <p>هر ۳۰ روز فعالیت مداوم</p>
-                    <div class="point-amount">+۱۰۰ امتیاز</div>
+                <div class="rig-card">
+                    <h3>⚡ Avalon A1566</h3>
+                    <ul class="rig-specs">
+                        <li><span>الگوریتم</span><span>SHA-256</span></li>
+                        <li><span>هش‌ریت</span><span>150 TH/s</span></li>
+                        <li><span>مصرف</span><span>3300W</span></li>
+                    </ul>
+                    <p class="rig-profit">$10.80/روز</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== HOW IT WORKS ==================== -->
-    <section class="how-it-works" id="how">
+    <!-- ==================== BLOG ==================== -->
+    <section class="blog" id="blog">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">راهنما</span>
-                <h2>چگونه شروع کنیم</h2>
-                <p>۴ قدم ساده برای جمع‌آوری امتیاز</p>
+                <span class="section-badge">آموزش</span>
+                <h2>مقالات و آموزش‌ها</h2>
+                <p>همه چیز درباره بلاکچین و ماینینگ</p>
             </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>ثبت‌نام</h3>
-                    <p>کیف پول خود را متصل کنید</p>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img"><i class="fas fa-book"></i></div>
+                    <div class="blog-body">
+                        <h3>مقدمه‌ای بر بلاکچین</h3>
+                        <p>آشنایی با مفاهیم پایه بلاکچین و رمزارزها</p>
+                    </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>فعال‌سازی</h3>
-                    <p>هر ۲۴ ساعت دکمه را بزنید</p>
+                <div class="blog-card">
+                    <div class="blog-img"><i class="fas fa-microchip"></i></div>
+                    <div class="blog-body">
+                        <h3>راهنمای شروع ماینینگ</h3>
+                        <p>چگونه استخراج رمزارز را شروع کنیم؟</p>
+                    </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>دعوت</h3>
-                    <p>لینک خود را به اشتراک بگذارید</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>دریافت</h3>
-                    <p>در زمان عرضه، امتیازات را دریافت کنید</p>
+                <div class="blog-card">
+                    <div class="blog-img"><i class="fas fa-shield-halved"></i></div>
+                    <div class="blog-body">
+                        <h3>امنیت در بلاکچین</h3>
+                        <p>نکات امنیتی برای محافظت از دارایی‌ها</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,10 +465,11 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3><i class="fas fa-bolt"></i> WA.io</h3>
-                    <p>پلتفرم غیرمتمرکز امتیازدهی</p>
+                    <p>پلتفرم غیرمتمرکز ماینینگ و بلاکچین</p>
                     <div class="social-links">
                         <a href="https://t.me/WAioToken" target="_blank"><i class="fab fa-telegram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
                         <a href="#"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
@@ -225,6 +477,7 @@
                     <h4>درباره</h4>
                     <a href="#">درباره ما</a>
                     <a href="#">اسناد فنی</a>
+                    <a href="#">نقشه راه</a>
                 </div>
                 <div class="footer-col">
                     <h4>قانونی</h4>
@@ -243,10 +496,86 @@
         </div>
     </footer>
 
-    <!-- JS (با / از ریشه) -->
-    <script src="/js/app.js"></script>
-    <script src="/js/wallet.js"></script>
-    <script src="/js/mining.js"></script>
-    <script src="/js/security.js"></script>
-</body>
-                                                   </html>
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Calculator
+        function updateCalc() {
+            const hash = parseFloat(document.getElementById('hashInput').value);
+            const power = parseFloat(document.getElementById('powerInput').value);
+            const elec = parseFloat(document.getElementById('electricityInput').value);
+            
+            document.getElementById('hashVal').textContent = hash;
+            document.getElementById('powerVal').textContent = power;
+            
+            const dailyBTC = (hash * 0.00000035);
+            const dailyUSD = dailyBTC * 67890;
+            const powerCost = (power * 24 / 1000) * elec;
+            const profit = dailyUSD - powerCost;
+            
+            document.getElementById('dailyProfit').textContent = '$' + profit.toFixed(2);
+        }
+
+        // Wallet
+        class WAWallet {
+            constructor() {
+                this.address = null;
+                this.points = 0;
+                this.lastMine = null;
+                this.load();
+            }
+            connect(address) {
+                if (/^0x[a-fA-F0-9]{40}$/.test(address)) {
+                    this.address = address; this.save(); return true;
+                }
+                return false;
+            }
+            disconnect() {
+                this.address = null; this.points = 0;
+                this.lastMine = null;
+                try { localStorage.removeItem('wa_wallet'); } catch(e) {}
+            }
+            save() {
+                try {
+                    localStorage.setItem('wa_wallet', JSON.stringify({
+                        address: this.address, points: this.points, lastMine: this.lastMine
+                    }));
+                } catch(e) {}
+            }
+            load() {
+                try {
+                    const d = localStorage.getItem('wa_wallet');
+                    if (d) {
+                        const p = JSON.parse(d);
+                        this.address = p.address || null;
+                        this.points = p.points || 0;
+                        this.lastMine = p.lastMine || null;
+                    }
+                } catch(e) {}
+            }
+        }
+        const wallet = new WAWallet();
+
+        class MiningSystem {
+            constructor() {
+                this.baseReward = 5;
+                this.miningInterval = 24 * 60 * 60 * 1000;
+            }
+            canMine() {
+                if (!wallet.lastMine) return true;
+                return (Date.now() - wallet.lastMine) >= this.miningInterval;
+            }
+            getRemainingTime() {
+                if (!wallet.lastMine) return '۰ دقیقه';
+                const diff = this.miningInterval - (Date.now() - wallet.lastMine);
+                if (diff <= 0) return '۰ دقیقه';
+                const h = Math.floor(diff / (60 * 60 * 1000));
+                const m = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+                return `${h}h ${m}m`;
+            }
+            mine() {
+                if (!wallet.address) {
+                    this.toast('ابتدا کیف پول را متصل کنید!', 'error');
+                    return false;
+                }
+                if (!this.canMine()) {
+                    this.toast('⏳ ' + this.getRemainingTime() +
