@@ -1,5 +1,12 @@
-// WA.io Main Application
+// WA.io Main App
 document.addEventListener('DOMContentLoaded', () => {
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('SW registered'))
+            .catch(err => console.log('SW error:', err));
+    }
+
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -11,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Update wallet UI if connected
-    if (wallet.address) {
-        document.getElementById('walletText').textContent = 
-            wallet.address.substring(0, 6) + '...' + wallet.address.substring(38);
+    // Update wallet UI
+    if (typeof wallet !== 'undefined' && wallet.address) {
+        const text = document.getElementById('walletText');
+        if (text) {
+            text.textContent = wallet.address.substring(0,6) + '...' + wallet.address.substring(38);
+        }
     }
 
-    console.log('⚡ WA.io Initialized');
-    console.log('🔒 Security: Active');
-    console.log('📊 Supply: 10,000,000,000 (Fixed)');
+    console.log('⚡ WA.io App Ready');
 });
