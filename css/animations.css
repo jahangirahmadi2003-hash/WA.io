@@ -1,0 +1,161 @@
+/* =========================================
+   WA.io - animations.css
+   Animation Styles
+   ========================================= */
+
+/* Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide Up */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Float */
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation Classes */
+
+.fade-in {
+    animation: fadeIn .6s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp .7s ease forwards;
+}
+
+.scale-in {
+    animation: scaleIn .5s ease forwards;
+}
+
+.float {
+    animation: floating 3s ease-in-out infinite;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Cards */
+
+.feature-card {
+    animation: fadeIn .6s ease forwards;
+}
+
+.feature-card:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.feature-card:nth-child(4) {
+    animation-delay: .4s;
+}
+
+.feature-card:nth-child(5) {
+    animation-delay: .5s;
+}
+
+.feature-card:nth-child(6) {
+    animation-delay: .6s;
+}
+
+/* Steps */
+
+.step {
+    animation: slideUp .7s ease forwards;
+}
+
+.step:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.step:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.step:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.step:nth-child(4) {
+    animation-delay: .4s;
+}
+
+/* Buttons */
+
+.btn {
+    transition: all .3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    transform: scale(.96);
+}
