@@ -1,5 +1,5 @@
-// WA.io Wallet System
-// Anti-Quantum Ready | Anti-Hack | Fixed Supply
+// WA.io Wallet System - Optimized
+// No UI blocking | Async | Secure
 
 class WAWallet {
     constructor() {
@@ -7,6 +7,7 @@ class WAWallet {
         this.points = 0;
         this.lastMine = null;
         this.referrals = 0;
+        this.load();
     }
 
     connect(address) {
@@ -18,8 +19,15 @@ class WAWallet {
         return false;
     }
 
+    disconnect() {
+        this.address = null;
+        this.points = 0;
+        this.lastMine = null;
+        this.referrals = 0;
+        localStorage.removeItem('wa_wallet');
+    }
+
     validateAddress(addr) {
-        // BSC address validation (anti-hack)
         return /^0x[a-fA-F0-9]{40}$/.test(addr);
     }
 
@@ -30,37 +38,173 @@ class WAWallet {
             lastMine: this.lastMine,
             referrals: this.referrals
         };
-        localStorage.setItem('wa_wallet', JSON.stringify(data));
+        try {
+            localStorage.setItem('wa_wallet', JSON.stringify(data));
+        } catch (e) {
+            console.error('Save failed:', e);
+        }
     }
 
     load() {
-        const data = localStorage.getItem('wa_wallet');
-        if (data) {
-            const parsed = JSON.parse(data);
-            this.address = parsed.address;
-            this.points = parsed.points || 0;
-            this.lastMine = parsed.lastMine;
-            this.referrals = parsed.referrals || 0;
+        try {
+            const data = localStorage.getItem('wa_wallet');
+            if (data) {
+                const parsed = JSON.parse(data);
+                this.address = parsed.address || null;
+                this.points = parsed.points || 0;
+                this.lastMine = parsed.lastMine || null;
+                this.referrals = parsed.referrals || 0;
+            }
+        } catch (e) {
+            console.error('Load failed:', e);
+            this.reset();
         }
+    }
+
+    reset() {
+        this.address = null;
+        this.points = 0;
+        this.lastMine = null;
+        this.referrals = 0;
     }
 }
 
+// Create wallet instance
 const wallet = new WAWallet();
-wallet.load();
 
-// UI Updates
-document.getElementById('walletBtn').addEventListener('click', () => {
+// ==================== UI Functions ====================
+function updateWalletUI() {
+    const btn = document.getElementById('walletBtn');
+    const text = document.getElementById('walletText');
+    
+    if (!btn || !text) return;
+    
     if (wallet.address) {
-        // Show wallet info
-        alert(`آدرس: ${wallet.address}\nامتیاز: ${wallet.points}`);
+        const short = wallet.address.substring(0, 6) + '...' + wallet.address.substring(38);
+        text.textContent = short;
+        btn.classList.add('connected');
+        btn.title = 'کلیک برای مشاهده اطلاعات';
     } else {
-        const addr = prompt('آدرس کیف پول BSC خود را وارد کنید:');
-        if (wallet.connect(addr)) {
-            document.getElementById('walletText').textContent = 
-                addr.substring(0, 6) + '...' + addr.substring(38);
-            alert('کیف پول با موفقیت متصل شد!');
+        text.textContent = 'اتصال کیف پول';
+        btn.classList.remove('connected');
+        btn.title = '';
+    }
+}
+
+function showWalletInfo() {
+    if (!wallet.address) return;
+    
+    const msg = [
+        `آدرس: ${wallet.address}`,
+        `امتیاز: ${wallet.points.toLocaleString()}`,
+        `دعوت‌ها: ${wallet.referrals}`,
+        '',
+        'برای قطع اتصال، دکمه را نگه دارید'
+    ].join('\n');
+    
+    alert(msg);
+}
+
+function showConnectDialog() {
+    // Use a fast, non-blocking approach
+    const addr = window.prompt('آدرس کیف پول BSC خود را وارد کنید:\n(مثال: 0x...)');
+    
+    if (!addr) return;
+    
+    const trimmed = addr.trim();
+    
+    if (!trimmed) return;
+    
+    if (wallet.connect(trimmed)) {
+        updateWalletUI();
+        // Use requestAnimationFrame to avoid INP issues
+        requestAnimationFrame(() => {
+            alert('✅ کیف پول با موفقیت متصل شد!');
+        });
+    } else {
+        requestAnimationFrame(() => {
+            alert('❌ آدرس نامعتبر است!\nآدرس باید با 0x شروع شود و ۴۰ کاراکتر باشد');
+        });
+    }
+}
+
+function handleDisconnect() {
+    if (!wallet.address) return;
+    
+    if (confirm('آیا مطمئن هستید که می‌خواهید کیف پول را قطع کنید؟\nامتیازات شما ذخیره می‌شوند.')) {
+        wallet.disconnect();
+        updateWalletUI();
+        requestAnimationFrame(() => {
+            alert('کیف پول قطع شد. امتیازات شما پاک شد.');
+        });
+    }
+}
+
+// ==================== Event Listeners ====================
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('walletBtn');
+    
+    if (!btn) return;
+    
+    // Single click - connect or show info
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        if (wallet.address) {
+            showWalletInfo();
         } else {
-            alert('آدرس نامعتبر است!');
+            // Use setTimeout to avoid blocking the main thread
+            setTimeout(() => {
+                showConnectDialog();
+            }, 100);
+        }
+    });
+    
+    // Long press - disconnect
+    let pressTimer;
+    btn.addEventListener('mousedown', () => {
+        if (wallet.address) {
+            pressTimer = setTimeout(() => {
+                handleDisconnect();
+            }, 1500);
+        }
+    });
+    
+    btn.addEventListener('mouseup', () => {
+        clearTimeout(pressTimer);
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+        clearTimeout(pressTimer);
+    });
+    
+    // Touch events for mobile
+    btn.addEventListener('touchstart', () => {
+        if (wallet.address) {
+            pressTimer = setTimeout(() => {
+                handleDisconnect();
+            }, 1500);
+        }
+    });
+    
+    btn.addEventListener('touchend', () => {
+        clearTimeout(pressTimer);
+    });
+    
+    // Initial UI update
+    updateWalletUI();
+});
+
+// Keyboard shortcut: Ctrl+W to connect/disconnect
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'w') {
+        e.preventDefault();
+        if (wallet.address) {
+            handleDisconnect();
+        } else {
+            setTimeout(() => {
+                showConnectDialog();
+            }, 100);
         }
     }
 });
