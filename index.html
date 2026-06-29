@@ -2,286 +2,136 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="WA.io">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="WA.io">
-    <meta name="theme-color" content="#0f172a">
-    <link rel="apple-touch-icon" href="/icons/icon-192.png">
-    <link rel="manifest" href="/manifest.json">
-    
-    <meta name="description" content="WA.io - پلتفرم غیرمتمرکز امتیازدهی | ضد تورم | ضد کوانتوم | عرضه ثابت">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>WA.io - پلتفرم امتیازدهی غیرمتمرکز</title>
-    
+    <meta name="description" content="WA.io - پلتفرم امتیازدهی غیرمتمرکز">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="/css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7989403305267753" crossorigin="anonymous"></script>
+
+    <!-- AdSense (فقط یک بار) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
+
 <body>
 
-    <!-- ==================== LIVE TICKER ==================== -->
-    <div class="live-ticker">
-        <div class="container">
-            <div class="ticker-wrap">
-                <span>₿ BTC: $67,890 <span class="ticker-up">+2.34%</span></span>
-                <span>Ξ ETH: $3,456 <span class="ticker-up">+1.89%</span></span>
-                <span>◈ BNB: $598 <span class="ticker-down">-0.45%</span></span>
-                <span>⛏️ Hashrate: 650 EH/s</span>
-                <span>📊 Difficulty: 83.15T</span>
-                <span>🎁 Block Reward: 3.125 BTC</span>
-                <span>₿ BTC: $67,890 <span class="ticker-up">+2.34%</span></span>
-                <span>Ξ ETH: $3,456 <span class="ticker-up">+1.89%</span></span>
-                <span>◈ BNB: $598 <span class="ticker-down">-0.45%</span></span>
-            </div>
-        </div>
+<!-- ================= HEADER ================= -->
+<header>
+    <nav class="container">
+        <a class="logo"><i class="fas fa-bolt"></i> WA.io</a>
+
+        <ul class="nav-links">
+            <li><a href="#features">ویژگی‌ها</a></li>
+            <li><a href="#points">امتیازات</a></li>
+            <li><a href="#security">امنیت</a></li>
+            <li><a href="#how">راهنما</a></li>
+        </ul>
+
+        <button id="walletBtn">
+            <i class="fas fa-wallet"></i> اتصال کیف پول
+        </button>
+    </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <h1>WA.io</h1>
+    <p>پلتفرم امتیازدهی غیرمتمرکز</p>
+
+    <button id="startBtn">شروع جمع‌آوری امتیاز</button>
+</section>
+
+<!-- ================= ADS 1 ================= -->
+<div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7989403305267753"
+         data-ad-slot="6606292014"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+</div>
+
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+    <h2>ویژگی‌ها</h2>
+
+    <div class="grid">
+        <div>امتیاز روزانه</div>
+        <div>امتیاز دعوت</div>
+        <div>تبدیل به توکن</div>
     </div>
+</section>
 
-    <!-- ==================== HEADER ==================== -->
-    <header>
-        <nav class="container">
-            <a href="#" class="logo"><i class="fas fa-bolt"></i> WA.io</a>
-            <ul class="nav-links">
-                <li><a href="#features">ویژگی‌ها</a></li>
-                <li><a href="#points">امتیازات</a></li>
-                <li><a href="#security">امنیت</a></li>
-                <li><a href="#how">نحوه کار</a></li>
-                <li><a href="#contact">تماس</a></li>
-            </ul>
-            <div class="header-actions">
-                <button class="btn-lang"><i class="fas fa-globe"></i> FA</button>
-                <button class="btn-wallet" id="walletBtn">
-                    <i class="fas fa-wallet"></i> <span id="walletText">اتصال کیف پول</span>
-                </button>
-            </div>
-        </nav>
-    </header>
+<!-- ================= POINTS ================= -->
+<section id="points">
+    <h2>سیستم امتیاز</h2>
 
-    <!-- ==================== HERO ==================== -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge"><i class="fas fa-shield-halved"></i> غیرمتمرکز و امن</div>
-            <h1>WA.io</h1>
-            <p>پلتفرم امتیازدهی غیرمتمرکز</p>
-            <p class="hero-sub">امتیاز جمع کنید، در آینده به توکن تبدیل کنید</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" id="startBtn"><i class="fas fa-bolt"></i> شروع جمع‌آوری امتیاز</button>
-                <a href="https://t.me/WAioToken" target="_blank" class="btn btn-outline"><i class="fab fa-telegram"></i> کانال تلگرام</a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat"><span class="hero-stat-num">10,000,000,000</span><span class="hero-stat-label">عرضه ثابت</span></div>
-                <div class="hero-stat"><span class="hero-stat-num">0%</span><span class="hero-stat-label">تورم</span></div>
-                <div class="hero-stat"><span class="hero-stat-num">24h</span><span class="hero-stat-label">دوره ماینینگ</span></div>
-                <div class="hero-stat"><span class="hero-stat-num" id="totalUsers">۰</span><span class="hero-stat-label">کاربر فعال</span></div>
-            </div>
-        </div>
-    </section>
+    <p>هر 24 ساعت +5 امتیاز</p>
+</section>
 
-    <!-- ==================== ADS 1 (بعد از Hero) ==================== -->
-    <div style="max-width:1200px;margin:1.5rem auto;padding:0 1.5rem;text-align:center;min-height:100px">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-7989403305267753"
-             data-ad-slot="6606292014"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+<!-- ================= ADS 2 ================= -->
+<div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7989403305267753"
+         data-ad-slot="6606292014"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+</div>
 
-    <!-- ==================== FEATURES ==================== -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">ویژگی‌ها</span>
-                <h2>سیستم امتیازدهی WA</h2>
-                <p>امتیازات خود را جمع‌آوری کنید و در آینده تبدیل کنید</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
-                    <h3>امتیاز روزانه</h3>
-                    <p>هر ۲۴ ساعت وارد شوید و ۵ امتیاز رایگان دریافت کنید</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-users"></i></div>
-                    <h3>امتیاز ارجاع</h3>
-                    <p>دوستان خود را دعوت کنید و ۱۰ امتیاز بیشتر بگیرید</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
-                    <h3>۱ امتیاز = ۱ توکن</h3>
-                    <p>تبدیل مستقیم و بدون کارمزد در زمان عرضه</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-coins"></i></div>
-                    <h3>عرضه ثابت</h3>
-                    <p>۱۰ میلیارد واحد ثابت، بدون تورم</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                    <h3>قفل امن</h3>
-                    <p>تا زمان عرضه رسمی، برداشت غیرممکن است</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mobile-screen"></i></div>
-                    <h3>آماده برای اپ</h3>
-                    <p>به زودی اپلیکیشن موبایل منتشر می‌شود</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
-    <!-- ==================== POINTS ==================== -->
-    <section class="points" id="points">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">امتیازات</span>
-                <h2>سیستم امتیازدهی</h2>
-                <p>هر امتیاز = یک واحد در آینده</p>
-            </div>
-            <div class="points-grid">
-                <div class="point-card">
-                    <div class="point-icon"><i class="fas fa-calendar-check"></i></div>
-                    <h3>امتیاز پایه</h3>
-                    <p>هر ۲۴ ساعت یکبار</p>
-                    <div class="point-amount">+۵ امتیاز</div>
-                </div>
-                <div class="point-card featured">
-                    <div class="point-badge">پرطرفدار</div>
-                    <div class="point-icon"><i class="fas fa-user-plus"></i></div>
-                    <h3>امتیاز دعوت</h3>
-                    <p>به ازای هر دعوت موفق</p>
-                    <div class="point-amount">+۱۰ امتیاز</div>
-                </div>
-                <div class="point-card">
-                    <div class="point-icon"><i class="fas fa-award"></i></div>
-                    <h3>امتیاز وفاداری</h3>
-                    <p>هر ۳۰ روز فعالیت مداوم</p>
-                    <div class="point-amount">+۱۰۰ امتیاز</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ================= SECURITY ================= -->
+<section id="security">
+    <h2>امنیت</h2>
+    <p>ضد هک | ضد تورم | امنیت بالا</p>
+</section>
 
-    <!-- ==================== ADS 2 (بین Points و Security) ==================== -->
-    <div style="max-width:1200px;margin:1.5rem auto;padding:0 1.5rem;text-align:center;min-height:100px">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-7989403305267753"
-             data-ad-slot="6606292014"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+<!-- ================= HOW ================= -->
+<section id="how">
+    <h2>چگونه کار می‌کند</h2>
 
-    <!-- ==================== SECURITY ==================== -->
-    <section class="security" id="security">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">امنیت</span>
-                <h2>لایه‌های امنیتی WA</h2>
-                <p>محافظت شده با پیشرفته‌ترین فناوری‌های رمزنگاری</p>
-            </div>
-            <div class="security-grid">
-                <div class="security-card">
-                    <div class="security-icon"><i class="fas fa-atom"></i></div>
-                    <h3>ضد کوانتوم</h3>
-                    <p>رمزنگاری CRYSTALS-Kyber مقاوم در برابر حملات کوانتومی</p>
-                </div>
-                <div class="security-card">
-                    <div class="security-icon"><i class="fas fa-shield-virus"></i></div>
-                    <h3>ضد هک</h3>
-                    <p>قرارداد هوشمند تأیید شده و کیف پول Web3 امن</p>
-                </div>
-                <div class="security-card">
-                    <div class="security-icon"><i class="fas fa-ban"></i></div>
-                    <h3>ضد تورم</h3>
-                    <p>عرضه ثابت ۱۰ میلیارد - بدون امکان استخراج جدید</p>
-                </div>
-                <div class="security-card">
-                    <div class="security-icon"><i class="fas fa-lock"></i></div>
-                    <h3>قفل برداشت</h3>
-                    <p>تا زمان عرضه رسمی، برداشت غیرممکن است</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <ol>
+        <li>اتصال کیف پول</li>
+        <li>جمع‌آوری امتیاز</li>
+        <li>دعوت دوستان</li>
+        <li>دریافت توکن</li>
+    </ol>
+</section>
 
-    <!-- ==================== HOW IT WORKS ==================== -->
-    <section class="how-it-works" id="how">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">راهنما</span>
-                <h2>چگونه شروع کنیم</h2>
-                <p>۴ قدم ساده برای جمع‌آوری امتیاز</p>
-            </div>
-            <div class="steps">
-                <div class="step"><div class="step-number">1</div><h3>اتصال کیف پول</h3><p>کیف پول BSC خود را متصل کنید</p></div>
-                <div class="step"><div class="step-number">2</div><h3>فعال‌سازی</h3><p>هر ۲۴ ساعت دکمه را بزنید</p></div>
-                <div class="step"><div class="step-number">3</div><h3>دعوت دوستان</h3><p>لینک خود را به اشتراک بگذارید</p></div>
-                <div class="step"><div class="step-number">4</div><h3>دریافت توکن</h3><p>در زمان عرضه، ۱ امتیاز = ۱ توکن</p></div>
-            </div>
-        </div>
-    </section>
+<!-- ================= ADS 3 ================= -->
+<div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7989403305267753"
+         data-ad-slot="6606292014"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+</div>
 
-    <!-- ==================== ADS 3 (بین How و Footer) ==================== -->
-    <div style="max-width:1200px;margin:1.5rem auto;padding:0 1.5rem;text-align:center;min-height:100px">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-7989403305267753"
-             data-ad-slot="6606292014"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3><i class="fas fa-bolt"></i> WA.io</h3>
-                    <p>پلتفرم غیرمتمرکز امتیازدهی | ضد تورم | ضد کوانتوم | عرضه ثابت ۱۰ میلیارد</p>
-                    <div class="social-links">
-                        <a href="https://t.me/WAioToken" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>درباره</h4>
-                    <a href="#">درباره ما</a>
-                    <a href="#">اسناد فنی</a>
-                </div>
-                <div class="footer-col">
-                    <h4>قانونی</h4>
-                    <a href="/terms.html">شرایط استفاده</a>
-                    <a href="/privacy.html">حریم خصوصی</a>
-                </div>
-                <div class="footer-col">
-                    <h4>ارتباط</h4>
-                    <a href="https://t.me/WAioToken" target="_blank">تلگرام</a>
-                    <a href="#">تماس با ما</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 WA.io. تمام حقوق محفوظ است. | عرضه ثابت: ۱۰,۰۰۰,۰۰۰,۰۰۰ | ضد تورم | ضد کوانتوم</p>
-            </div>
-        </div>
-    </footer>
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p>© 2024 WA.io</p>
+</footer>
 
-    <!-- ==================== SCRIPTS ==================== -->
-    <script src="/js/wallet.js"></script>
-    <script src="/js/mining.js"></script>
-    <script src="/js/security.js"></script>
-    <script src="/js/app.js"></script>
+<!-- ================= JS ================= -->
+<script src="/js/app.js"></script>
+<script src="/js/wallet.js"></script>
+<script src="/js/mining.js"></script>
+
 </body>
-            </html>
+    </html>
